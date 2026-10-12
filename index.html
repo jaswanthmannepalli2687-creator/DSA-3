@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FlowMax - Network Flow Optimization System</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header>
+  <div class="brand"><div class="logo">F</div><div><h1>FlowMax</h1><div class="subtitle">Network Flow Optimization System • Edmonds–Karp / Max-Flow Min-Cut</div></div></div>
+</header>
+
+<div class="container">
+<div class="grid">
+<aside>
+  <section class="panel">
+    <h2>Network Controls</h2>
+    <label>Source Vertex</label><select id="source"></select>
+    <label>Sink Vertex</label><select id="sink"></select>
+
+    <h3>Add Directed Edge</h3>
+    <div class="row">
+      <div><label>From</label><input id="from" placeholder="A"></div>
+      <div><label>To</label><input id="to" placeholder="B"></div>
+    </div>
+    <label>Capacity</label><input id="capacity" type="number" min="1" placeholder="10">
+    <div class="buttons">
+      <button onclick="addEdge()">Add Edge</button>
+      <button class="danger" onclick="clearGraph()">Clear</button>
+    </div>
+    <button class="full" onclick="loadExample()">Load Example Network</button>
+    <button class="primary full" onclick="runMaxFlow()">▶ Calculate Maximum Flow</button>
+    <button class="full" onclick="animateSteps()">▷ Animate Augmenting Paths</button>
+
+    <h3>Edges</h3>
+    <div id="edgeList" class="edge-list"></div>
+  </section>
+</aside>
+
+<main>
+  <div class="stats">
+    <div class="stat"><span>MAX FLOW</span><strong id="maxFlow">—</strong></div>
+    <div class="stat"><span>AUGMENTATIONS</span><strong id="augmentations">0</strong></div>
+    <div class="stat"><span>MIN CUT</span><strong id="minCut">—</strong></div>
+    <div class="stat"><span>ALGORITHM</span><strong style="font-size:15px">Edmonds-Karp</strong></div>
+  </div>
+
+  <section class="panel">
+    <h2>Interactive Flow Network</h2>
+    <canvas id="canvas"></canvas>
+    <div class="legend">
+      <span><i class="dot" style="background:#60a5fa"></i>Normal edge</span>
+      <span><i class="dot" style="background:#5eead4"></i>Augmenting path</span>
+      <span><i class="dot" style="background:#fbbf24"></i>Minimum cut</span>
+      <span><i class="dot" style="background:#fb7185"></i>Source / Sink</span>
+    </div>
+  </section>
+
+  <section class="panel" style="margin-top:18px">
+    <h2>Algorithm Execution Log</h2>
+    <div id="log" class="log">Ready. Load the example network or add your own directed edges.</div>
+  </section>
+
+  <section class="panel" style="margin-top:18px">
+    <h2>Flow Assignment & Residual Capacities</h2>
+    <div id="tableWrap"><div class="small">Run the algorithm to view final edge flows.</div></div>
+  </section>
+</main>
+</div>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
